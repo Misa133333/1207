@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+<header>
     <meta charset="UTF-8">
-    <title>解析結果</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+     <title>写真からそのタイトルやテーマを出力するアプリの開発</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</header>
 <body>
-    <h1>解析結果</h1>
+    <div class="main">    
+        <header>
+        <h1>解析結果</h1>
     <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 500px; height: auto;">
     <p>{{ story }}</p>
-    <a href="/">別の画像をアップロードする</a>
+
+</body><h3>ここに画像をアップロードしてください。すると短文のテーマが反映されます。</h3>
+    <br>
+    <br>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    </div>
+    <footer>
+        <br>
+        <br>
+        <p>&copy; 2023 kana</p>
+    </footer>
 </body>
 </html>
