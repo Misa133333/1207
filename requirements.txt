@@ -1,3 +1,4 @@
 flask
 werkzeug
 azure-cognitiveservices-vision-computervision
+gunicorn==20.1.0
