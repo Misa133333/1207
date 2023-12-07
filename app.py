@@ -16,7 +16,7 @@ computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredenti
 app = Flask(__name__)
 
 # 画像を保存するディレクトリへのパス
-app.config['UPLOAD_FOLDER'] = r"C:\Users\nagata\Desktop\kadai_app_creation\static\uploads"
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static', 'uploads')
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
