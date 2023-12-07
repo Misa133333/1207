@@ -41,12 +41,12 @@ def upload_file():
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             try:
-            # ファイルを指定されたパスに保存
-            file.save(file_path)
+                # ファイルを指定されたパスに保存
+                file.save(file_path)
             except Exception as e:
-            # エラーをログに記録
-            app.logger.error(f"Error saving file: {e}")
-            return "Error saving file"
+                # エラーをログに記録
+                app.logger.error(f"Error saving file: {e}")
+                return "Error saving file"
             # 保存したファイルを開き、Azure Computer Vision APIに送信
             with open(file_path, 'rb') as image_stream:
                 analysis = computervision_client.analyze_image_in_stream(image_stream, visual_features=[VisualFeatureTypes.tags])
