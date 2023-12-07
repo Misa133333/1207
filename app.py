@@ -16,7 +16,7 @@ computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredenti
 app = Flask(__name__)
 
 # 画像を保存するディレクトリへのパス
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static', 'uploads')
+app.config['UPLOAD_FOLDER'] = '/path/to/your/uploads'
 
 # ディレクトリが存在しない場合に作成
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
