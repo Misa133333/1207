@@ -41,10 +41,9 @@ def upload_file():
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             try:
-                # ファイルを指定されたパスに保存
                 file.save(file_path)
+                app.logger.info(f"File saved to {file_path}")
             except Exception as e:
-                # エラーをログに記録
                 app.logger.error(f"Error saving file: {e}")
                 return "Error saving file"
             # 保存したファイルを開き、Azure Computer Vision APIに送信
