@@ -40,14 +40,21 @@ def upload_file():
             # ファイル名を安全な形式に変換し、ファイルパスを生成
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            try:
             # ファイルを指定されたパスに保存
             file.save(file_path)
+            except Exception as e:
+            # エラーをログに記録
+            app.logger.error(f"Error saving file: {e}")
+            return "Error saving file"
             # 保存したファイルを開き、Azure Computer Vision APIに送信
             with open(file_path, 'rb') as image_stream:
                 analysis = computervision_client.analyze_image_in_stream(image_stream, visual_features=[VisualFeatureTypes.tags])
             #生成されたタグに基づいてストーリーを生成
             story = generate_complex_story(analysis.tags)
             image_url = url_for('static', filename=f'uploads/{filename}')
+            # 生成された URL をログに出力
+            app.logger.info(f"Generated Image URL: {image_url}")
             # 解析結果をテンプレートに渡してレンダリング
             return render_template('result.html', story=story, image_url=image_url)
                     
